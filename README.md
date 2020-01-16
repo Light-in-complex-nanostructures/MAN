@@ -1,0 +1,5 @@
+# MAN (Modal Analysis of Nanoresonators)
+
+![MAN logo](logo_MAN.png)
+
+**MAN** is an open-source software for analyzing electromagnetic micro and nanoresonators. It is composed of two solvers, **QNMEig** and **QNMPole**, which compute and normalize the quasinormal modes (QNMs), i.e. the quality factor Q and mode volume V. **QNMEig** operates under the COMSOL Multiphysics platform; **QNMPole** can be used with any frequency-domain electromagnetic solver. These solvers are valued by an increasing number of toolboxes, which allow a transparent analysis of nanoresonators with analytical formulae: reconstruction of the field in the modal basis, scattering and extinction cross-section spectra, LDOS spatial and spectral maps, Purcell factor, multipolar decomposition, generation of second-harmonics, temporal domain analysis … In the present version, the toolboxes are solver dependent; this is formal and with a minor effort, the user using one solver may benefit from the toolboxes developed for the other solver. In future versions, the toolboxes will be shared.
