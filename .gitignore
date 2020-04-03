@@ -1,0 +1,4 @@
+**/*.docx
+QNMEig/TOOLBOX/QNMtoolbox_multipole/QNMtoolbox_multipole_functions/*.m
+QNMEig/TOOLBOX/QNMtoolbox_nonlinear/Utilities/*.m
+

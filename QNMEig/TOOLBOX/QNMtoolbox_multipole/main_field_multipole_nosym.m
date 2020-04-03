@@ -3,8 +3,8 @@ CT.c = 299792458; % Speed of light
 CT.epsilon0 = 8.854187817e-12; % Vacuum permittivity
 CT.mu0 = 4e-7*pi; % Vacuum permeability
 %% User defined parameters 
-model_path{1}='COMSOL model licensed'; % Path of the COMSOL file
-model_name{1}='dolmen_PRA2020_multipole.mph'; % Name of the COMSOL file
+model_path{1}=fileparts(which('QNM_Dolmen_sym.mph')); % Path of the COMSOL file
+model_name{1}='QNM_Dolmen.mph'; % Name of the COMSOL file
 PEC=[0 0 0;]; % Perfect Electric Conductor Planes
 PMC=[0 0 0;]; % Perfect Magnetic Conductor Planes
 scatter  ='sel3';  % Domains occupied by the Scatter(can be either a series of numbers or a string)
@@ -16,13 +16,15 @@ Ndes_th2=10;
 Ndes_ph1=10;
 Ndes_ph2=10;
 r= 120e-9; % Radius of the circumscribing sphere
+output ='exp(iwt)'; % The output covention: exp(iwt) or exp(-iwt)
 % Not used
 sub='';
 NG         =false; 
+
 %% 1. Caluclate the eigen solution related variables
 for isca=1:length(model_path)
     % Read the input parameters assigned by the user.
-    Sca0=modelPost_obj_multi2(model_path{isca}, model_name{isca}, r, nmax, Ndes_th1, Ndes_th2, Ndes_ph1, Ndes_ph2, scatter, matvar, sub);
+    Sca0=modelPost_obj_multi2(model_path{isca}, model_name{isca}, r, nmax, Ndes_th1, Ndes_th2, Ndes_ph1, Ndes_ph2, scatter, matvar, output, sub);
     % Extract the material parameters, eigenfrequencies, modal normalizers from the COMSOL file. 
     Sca0=extract_sol(Sca0);
     % Extract the modal fields inside the resonator from the COMSOL file.
@@ -40,5 +42,7 @@ end
 Sca = file_management(Sca, model_path, model_name, PEC, PMC);
 % Compute the p, m, and Qe using  Eqs.(4)-(6).
 Sca = multipole_LZX(Sca, CT);
+% Change the convention of the output: exp(-iwt) or exp(iwt)
+Sca = Sca.convention_change(Sca);
 
 
