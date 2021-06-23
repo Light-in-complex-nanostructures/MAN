@@ -1,0 +1,3 @@
+17/06/2021
+the main program is QNMPole_unis.m. Read it first.
+It could be usefull to read also arXiv:2106.05502
